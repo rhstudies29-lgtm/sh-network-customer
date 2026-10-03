@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>এস.এইচ ক্যাবল নেটওয়ার্ক - গ্রাহক</title>
+    <title>এস,এইচ ক্যাবল নেটওয়ার্ক - গ্রাহক</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -30,24 +30,22 @@
         .dev-footer { background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a); border-top: 1px solid #0284c7; box-shadow: 0 -4px 15px rgba(2,132,199,0.3); }
         .swal2-title, .swal2-html-container { font-family: 'Hind Siliguri', sans-serif !important; }
 
-        /* Receipt Template CSS (Exact Image Match) */
+        /* Receipt Template CSS */
         #receipt-template {
             width: 210mm; height: 125mm; padding: 25px; background: white; color: black; font-family: 'Hind Siliguri', sans-serif;
             border: 2px solid #ccc; position: relative; margin: 0 auto;
         }
         .rcpt-header { background: #1e3a8a; color: white; padding: 12px; text-align: center; border-radius: 8px; display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 5px; }
-        .rcpt-row { display: flex; align-items: baseline; margin-bottom: 12px; }
-        .rcpt-label { font-weight: bold; font-size: 14px; min-width: 90px; }
-        .rcpt-line { flex-grow: 1; border-bottom: 1px dashed #000; margin-left: 10px; font-weight: bold; font-size: 15px; padding-bottom: 2px; }
-        .month-table { width: 100px; border-collapse: collapse; text-align: center; border: 1px solid #000; font-size: 11px; font-weight: bold; }
-        .month-table td { border: 1px solid #000; padding: 2px; }
+        .rcpt-row { display: flex; align-items: baseline; margin-bottom: 15px; }
+        .rcpt-label { font-weight: bold; font-size: 15px; min-width: 100px; }
+        .rcpt-line { flex-grow: 1; border-bottom: 1px dashed #000; margin-left: 10px; font-weight: bold; font-size: 16px; padding-bottom: 2px; }
     </style>
 </head>
-<body class="min-h-screen pb-10 relative flex flex-col">
+<body class="min-h-screen pb-12 relative flex flex-col">
 
     <!-- Header -->
     <nav class="bg-gradient-to-r from-blue-800 via-blue-600 to-indigo-800 text-white p-5 rounded-b-[2rem] shadow-xl text-center relative z-20">
-        <h1 class="text-2xl font-extrabold tracking-wide drop-shadow-md"><i class="fas fa-satellite-dish text-blue-300 mr-1"></i> এস.এইচ ক্যাবল নেটওয়ার্ক</h1>
+        <h1 class="text-2xl font-extrabold tracking-wide drop-shadow-md"><i class="fas fa-satellite-dish text-blue-300 mr-1"></i> এস,এইচ ক্যাবল নেটওয়ার্ক</h1>
         <p class="text-[13px] font-medium mt-1 text-blue-100">উত্তর কেরোয়া, নয়ারহাট, জোড়পুল, রায়পুর</p>
         <div class="mt-3 bg-white/20 inline-block px-5 py-2 rounded-xl border border-white/30 backdrop-blur-md shadow-inner">
             <div class="text-sm font-semibold">প্রোঃ সুমন - <a href="tel:01741253292" class="text-yellow-300 hover:text-yellow-400 font-bold tracking-wider">01741253292</a></div>
@@ -72,7 +70,7 @@
         <div class="bg-gradient-to-r from-amber-100 to-yellow-100 border border-yellow-300 text-yellow-800 rounded-xl shadow-sm flex items-center mb-5 overflow-hidden w-full">
             <div class="bg-yellow-500 text-white px-3 py-2 flex items-center justify-center z-10"><i class="fas fa-bullhorn animate-pulse text-lg"></i></div>
             <div class="marquee-wrapper flex-1 py-2 text-sm border-l border-yellow-300">
-                <div id="owner-notice-marquee" class="marquee-content text-yellow-900">স্বাগতম! এস.এইচ ক্যাবল নেটওয়ার্ক-এ নিরবচ্ছিন্ন ইন্টারনেট উপভোগ করতে সময়মতো বিল পরিশোধ করুন।</div>
+                <div id="owner-notice-marquee" class="marquee-content text-yellow-900">স্বাগতম! এস,এইচ ক্যাবল নেটওয়ার্ক-এ নিরবচ্ছিন্ন ইন্টারনেট উপভোগ করতে সময়মতো বিল পরিশোধ করুন।</div>
             </div>
         </div>
 
@@ -153,13 +151,15 @@
     <div id="pdf-wrapper" class="hidden">
         <div id="receipt-template">
             <p style="text-align: center; font-size: 13px; margin: 0 0 5px 0; font-weight: bold;">বিসমিল্লাহির রাহমানির রাহিম</p>
+            
             <div class="rcpt-header">
                 <i class="fas fa-satellite-dish" style="font-size: 40px;"></i>
                 <div>
-                    <h1 style="font-size: 32px; font-weight: 900; margin: 0; letter-spacing: 1px;">এস.এইচ ক্যাবল নেটওয়ার্ক</h1>
+                    <h1 style="font-size: 32px; font-weight: 900; margin: 0; letter-spacing: 1px;">এস,এইচ ক্যাবল নেটওয়ার্ক</h1>
                     <p style="margin: 4px 0 0 0; font-size: 14px;">উত্তর কেরোয়া, নয়ারহাট, জোড়পুল, রায়পুর, লক্ষ্মীপুর ।</p>
                 </div>
             </div>
+            
             <p style="text-align: center; font-size: 16px; font-weight: bold; margin: 10px 0 15px 0;">
                 মোবাইল : 01741253292, বিকাশ পেমেন্ট: 01315273777
             </p>
@@ -170,24 +170,20 @@
                 <div style="font-weight:bold; font-size:16px;">তারিখ : <span id="r-date" style="border-bottom:1px dashed #000; padding:0 15px;"></span></div>
             </div>
 
-            <div style="display: flex; gap: 20px;">
-                <!-- Left Months Table -->
-                <table class="month-table" id="receipt-month-table">
-                    <!-- Injected dynamically -->
-                </table>
-                
-                <!-- Right Details -->
-                <div style="flex-grow: 1; padding-top: 10px;">
-                    <div class="rcpt-row"><span class="rcpt-label">নাম</span><span class="rcpt-label" style="min-width:auto;">:</span><span id="r-name" class="rcpt-line"></span></div>
-                    <div class="rcpt-row"><span class="rcpt-label">ইউজার আইডি</span><span class="rcpt-label" style="min-width:auto;">:</span><span id="r-userid" class="rcpt-line"></span></div>
-                    <div class="rcpt-row"><span class="rcpt-label">ঠিকানা</span><span class="rcpt-label" style="min-width:auto;">:</span><span id="r-address" class="rcpt-line"></span></div>
-                    <div class="rcpt-row"><span class="rcpt-label">টাকা পরিমান</span><span class="rcpt-label" style="min-width:auto;">:</span><span id="r-amount" class="rcpt-line"></span><span style="font-weight:bold; font-size:16px; margin-left:10px;">টাকা</span></div>
-                    <div class="rcpt-row"><span class="rcpt-label">কথায়</span><span class="rcpt-label" style="min-width:auto;">:</span><span id="r-words" class="rcpt-line"></span></div>
-                </div>
+            <!-- Content Area (Full width) -->
+            <div style="padding: 10px 20px;">
+                <div class="rcpt-row"><span class="rcpt-label">নাম</span><span class="rcpt-label" style="min-width:auto;">:</span><span id="r-name" class="rcpt-line"></span></div>
+                <div class="rcpt-row"><span class="rcpt-label">ইউজার আইডি</span><span class="rcpt-label" style="min-width:auto;">:</span><span id="r-userid" class="rcpt-line"></span></div>
+                <div class="rcpt-row"><span class="rcpt-label">ঠিকানা</span><span class="rcpt-label" style="min-width:auto;">:</span><span id="r-address" class="rcpt-line"></span></div>
+                <div class="rcpt-row"><span class="rcpt-label">টাকা পরিমান</span><span class="rcpt-label" style="min-width:auto;">:</span><span id="r-amount" class="rcpt-line"></span><span style="font-weight:bold; font-size:16px; margin-left:10px;">টাকা</span></div>
             </div>
 
-            <div style="position: absolute; bottom: 25px; left: 25px; right: 25px; display: flex; justify-content: space-between;">
-                <p style="border-top: 1px solid #000; padding-top: 5px; font-size: 15px; font-weight:bold;">গ্রাহকের স্বাক্ষর</p>
+            <!-- Dynamic Thank You Note -->
+            <div style="margin-top: 25px; text-align: center;">
+                <p id="r-thank-you" style="font-size: 17px; font-weight: bold; color: #1e3a8a;"></p>
+            </div>
+
+            <div style="position: absolute; bottom: 25px; right: 25px;">
                 <p style="border-top: 1px solid #000; padding-top: 5px; font-size: 15px; font-weight:bold;">আদায়কারীর স্বাক্ষর</p>
             </div>
         </div>
@@ -205,19 +201,10 @@
         let loggedInUser = null; let paymentData = []; let paymentCount = 0;
         const bnMonths = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
 
-        function numberToBanglaWords(amount) {
-            const numStr = amount.toString(); const en = ['0','1','2','3','4','5','6','7','8','9']; const bn = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
-            let res = ''; for(let i=0; i<numStr.length; i++) { let idx = en.indexOf(numStr[i]); res += idx !== -1 ? bn[idx] : numStr[i]; } return res + " টাকা মাত্র";
-        }
-
         window.onload = function() {
             // Auto Login Check
             let savedId = localStorage.getItem('ss_cable_user_id');
-            if(savedId) {
-                document.getElementById('login-id').value = savedId;
-                loginUser(true);
-            }
-
+            if(savedId) { document.getElementById('login-id').value = savedId; loginUser(true); }
             db.ref('settings/developer_marquee').on('value', snap => { if(snap.exists() && snap.val() !== "") document.getElementById('dev-marquee').innerText = snap.val(); });
             db.ref('settings/owner_notice').on('value', snap => { if(snap.exists() && snap.val() !== "") document.getElementById('owner-notice-marquee').innerText = snap.val(); });
         };
@@ -233,8 +220,7 @@
                 if(snapshot.exists()) { 
                     loggedInUser = snapshot.val(); 
                     localStorage.setItem('ss_cable_user_id', id); 
-                    if(!isAuto) Swal.close();
-                    showAppScreen(); 
+                    if(!isAuto) Swal.close(); showAppScreen(); 
                 } else { 
                     if(!isAuto) Swal.fire({ icon: 'error', title: 'ভুল আইডি', text: 'ইউজার আইডি পাওয়া যায়নি!', confirmButtonColor: '#ef4444' });
                     document.getElementById('login-id').disabled = false; localStorage.removeItem('ss_cable_user_id');
@@ -352,14 +338,10 @@
             document.getElementById('r-id').innerText = rNo || "N/A"; document.getElementById('r-date').innerText = dt;
             document.getElementById('r-name').innerText = loggedInUser.name; document.getElementById('r-userid').innerText = loggedInUser.userId;
             document.getElementById('r-address').innerText = loggedInUser.address || "N/A"; 
-            document.getElementById('r-amount').innerText = amt; document.getElementById('r-words').innerText = numberToBanglaWords(amt);
+            document.getElementById('r-amount').innerText = amt; 
             
-            let tbl = document.getElementById('receipt-month-table'); tbl.innerHTML = '';
             let paidMonthName = mth.split(' ')[0]; 
-            bnMonths.forEach(m => {
-                let bg = (m === paidMonthName) ? 'background-color: #1e3a8a; color: white;' : '';
-                tbl.innerHTML += `<tr><td style="${bg}">${m}</td></tr>`;
-            });
+            document.getElementById('r-thank-you').innerText = `ধন্যবাদ ${paidMonthName} মাসের বিল পরিশোধ করার জন্য।`;
 
             let el = document.getElementById('receipt-template'); document.getElementById('pdf-wrapper').classList.remove('hidden');
             
