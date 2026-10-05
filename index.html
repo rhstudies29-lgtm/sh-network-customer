@@ -4,12 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- Anti-Cache Meta Tags -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <!-- Aggressive Anti-Cache Meta Tags -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
     <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Expires" content="-1">
     
-    <title>এস,এইচ ক্যাবল নেটওয়ার্ক - গ্রাহক</title>
+    <!-- Smart Auto Cache Buster -->
+    <script>
+        const APP_VERSION = "2.0"; // গিটহাবে নতুন কোড দিলে এই নাম্বারটি (যেমন: 2.1) পরিবর্তন করে দেবেন
+        if(localStorage.getItem("customer_app_version") !== APP_VERSION) {
+            localStorage.setItem("customer_app_version", APP_VERSION);
+            window.location.replace(window.location.pathname + "?v=" + Date.now());
+        }
+    </script>
+
+    <title>এস.এইচ ক্যাবল নেটওয়ার্ক - গ্রাহক</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -17,7 +26,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     
-    <!-- HTML to JPEG Image Library -->
+    <!-- HTML to JPEG Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
@@ -38,7 +47,6 @@
         .dev-footer { background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a); border-top: 1px solid #0284c7; box-shadow: 0 -4px 15px rgba(2,132,199,0.3); }
         .swal2-title, .swal2-html-container { font-family: 'Hind Siliguri', sans-serif !important; }
 
-        /* HD Receipt Template CSS For Image Export */
         #receipt-template {
             width: 210mm; height: 125mm; padding: 25px; background: white; color: black; font-family: 'Hind Siliguri', sans-serif;
             border: 2px solid #ccc; position: relative; margin: 0 auto;
@@ -51,9 +59,8 @@
 </head>
 <body class="min-h-screen pb-12 relative flex flex-col">
 
-    <!-- Header -->
     <nav class="bg-gradient-to-r from-blue-800 via-blue-600 to-indigo-800 text-white p-5 rounded-b-[2rem] shadow-xl text-center relative z-20">
-        <h1 class="text-2xl font-extrabold tracking-wide drop-shadow-md"><i class="fas fa-satellite-dish text-blue-300 mr-1"></i> এস,এইচ ক্যাবল নেটওয়ার্ক</h1>
+        <h1 class="text-2xl font-extrabold tracking-wide drop-shadow-md"><i class="fas fa-satellite-dish text-blue-300 mr-1"></i> এস.এইচ ক্যাবল নেটওয়ার্ক</h1>
         <p class="text-[13px] font-medium mt-1 text-blue-100">উত্তর কেরোয়া, নয়ারহাট, জোড়পুল, রায়পুর</p>
         <div class="mt-3 bg-white/20 inline-block px-5 py-2 rounded-xl border border-white/30 backdrop-blur-md shadow-inner">
             <div class="text-sm font-semibold">প্রোঃ সুমন - <a href="tel:01741253292" class="text-yellow-300 hover:text-yellow-400 font-bold tracking-wider">01741253292</a></div>
@@ -61,7 +68,6 @@
         </div>
     </nav>
 
-    <!-- Login Area -->
     <div id="login-screen" class="flex justify-center items-center flex-1 px-4 mt-6">
         <div class="glass-card p-8 rounded-3xl w-full max-w-sm text-center">
             <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-inner"><i class="fas fa-user-lock text-3xl"></i></div>
@@ -71,13 +77,12 @@
         </div>
     </div>
 
-    <!-- Main App Screen -->
     <div id="app-screen" class="hidden px-4 pb-20 mt-4 max-w-md mx-auto w-full smooth-scroll">
         
         <div class="bg-gradient-to-r from-amber-100 to-yellow-100 border border-yellow-300 text-yellow-800 rounded-xl shadow-sm flex items-center mb-5 overflow-hidden w-full">
             <div class="bg-yellow-500 text-white px-3 py-2 flex items-center justify-center z-10"><i class="fas fa-bullhorn animate-pulse text-lg"></i></div>
             <div class="marquee-wrapper flex-1 py-2 text-sm border-l border-yellow-300">
-                <div id="owner-notice-marquee" class="marquee-content text-yellow-900">স্বাগতম! এস,এইচ ক্যাবল নেটওয়ার্ক-এ নিরবচ্ছিন্ন ইন্টারনেট উপভোগ করতে সময়মতো বিল পরিশোধ করুন।</div>
+                <div id="owner-notice-marquee" class="marquee-content text-yellow-900">স্বাগতম! এস.এইচ ক্যাবল নেটওয়ার্ক-এ নিরবচ্ছিন্ন ইন্টারনেট উপভোগ করতে সময়মতো বিল পরিশোধ করুন।</div>
             </div>
         </div>
 
@@ -109,7 +114,7 @@
         <div class="mt-6 bg-white p-6 rounded-3xl shadow-md border border-gray-100 mb-5">
             <h3 class="font-bold text-lg mb-3 text-gray-800"><i class="fas fa-headset text-red-500 text-lg mr-1"></i> নতুন অভিযোগ জানান</h3>
             <textarea id="issue-text" rows="3" placeholder="সমস্যাটি বিস্তারিত লিখুন..." class="w-full p-4 border border-gray-200 rounded-2xl mb-4 bg-gray-50 outline-none focus:border-red-400 focus:ring-2 focus:ring-red-100 transition resize-none text-sm"></textarea>
-            <button onclick="submitComplaint()" class="w-full bg-gradient-to-r from-red-500 to-rose-500 hover:from-red-600 hover:to-rose-600 text-white py-3.5 rounded-2xl font-bold shadow-md transition">কর্তৃপক্ষকে পাঠান</button>
+            <button id="btn-submit-complaint" onclick="submitComplaint()" class="w-full bg-gradient-to-r from-red-500 to-rose-500 hover:from-red-600 hover:to-rose-600 text-white py-3.5 rounded-2xl font-bold shadow-md transition">কর্তৃপক্ষকে পাঠান</button>
         </div>
     </div>
 
@@ -150,7 +155,7 @@
         </div>
     </div>
 
-    <!-- Hidden A5 Landscape Receipt Template (HTML to JPEG) -->
+    <!-- Hidden A5 Landscape Receipt Template (HTML to JPEG Export) -->
     <div id="pdf-wrapper" class="hidden">
         <div id="receipt-template">
             <p style="text-align: center; font-size: 13px; margin: 0 0 5px 0; font-weight: bold;">বিসমিল্লাহির রাহমানির রাহিম</p>
@@ -158,15 +163,13 @@
             <div class="rcpt-header">
                 <i class="fas fa-satellite-dish" style="font-size: 40px;"></i>
                 <div>
-                    <!-- Font fix: Removed letter-spacing to prevent html2canvas breaking Bengali text -->
-                    <h1 style="font-size: 32px; font-family: 'Hind Siliguri', sans-serif; font-weight: 900; margin: 0;">এস,এইচ ক্যাবল নেটওয়ার্ক</h1>
+                    <!-- No letter-spacing -->
+                    <h1 style="font-size: 32px; font-family: 'Hind Siliguri', sans-serif; font-weight: 900; margin: 0;">এস.এইচ ক্যাবল নেটওয়ার্ক</h1>
                     <p style="margin: 4px 0 0 0; font-size: 14px;">উত্তর কেরোয়া, নয়ারহাট, জোড়পুল, রায়পুর, লক্ষ্মীপুর ।</p>
                 </div>
             </div>
             
-            <p style="text-align: center; font-size: 16px; font-weight: bold; margin: 10px 0 15px 0;">
-                মোবাইল : 01741253292, বিকাশ পেমেন্ট: 01315273777
-            </p>
+            <p style="text-align: center; font-size: 16px; font-weight: bold; margin: 10px 0 15px 0;">মোবাইল : 01741253292, বিকাশ পেমেন্ট: 01315273777</p>
             
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                 <div style="font-weight:bold; font-size:16px;">নং- <span id="r-id" style="text-decoration:underline; padding:0 5px;"></span></div>
@@ -174,7 +177,6 @@
                 <div style="font-weight:bold; font-size:16px;">তারিখ : <span id="r-date" style="border-bottom:1px dashed #000; padding:0 15px;"></span></div>
             </div>
 
-            <!-- Content Area (Full width) -->
             <div style="padding: 10px 20px;">
                 <div class="rcpt-row"><span class="rcpt-label">নাম</span><span class="rcpt-label" style="min-width:auto;">:</span><span id="r-name" class="rcpt-line"></span></div>
                 <div class="rcpt-row"><span class="rcpt-label">ইউজার আইডি</span><span class="rcpt-label" style="min-width:auto;">:</span><span id="r-userid" class="rcpt-line"></span></div>
@@ -339,22 +341,35 @@
             }); c.innerHTML=html+`</div>`;
         }
 
+        // 100% Fixed Submit Complaint logic
         function submitComplaint() {
             let t = document.getElementById('issue-text').value.trim(); 
             if(!t) return Swal.fire({ icon: 'warning', title: 'খালি অভিযোগ', text: 'দয়া করে সমস্যার কথা বিস্তারিত লিখুন!', confirmButtonColor: '#ef4444' });
 
+            // Disable button to prevent double-click
+            document.getElementById('btn-submit-complaint').disabled = true;
             Swal.fire({ title: 'পাঠানো হচ্ছে...', allowOutsideClick: false, didOpen: () => { Swal.showLoading(); }});
 
-            db.ref('complaints/T-' + Date.now()).set({ ticketId: "T-"+Date.now(), userId: loggedInUser.userId, name: loggedInUser.name, mobile: loggedInUser.mobile, issue: t, status: 'pending', date: new Date().toLocaleDateString('bn-BD') })
-            .then(() => { 
+            let tId = "T-" + Date.now(); // Generated once safely
+            db.ref('complaints/' + tId).set({ 
+                ticketId: tId, 
+                userId: loggedInUser.userId, 
+                name: loggedInUser.name, 
+                mobile: loggedInUser.mobile, 
+                issue: t, 
+                status: 'pending', 
+                date: new Date().toLocaleDateString('bn-BD') 
+            }).then(() => { 
                 Swal.fire({ icon: 'success', title: 'সফল', text: 'আপনার অভিযোগটি সফলভাবে কর্তৃপক্ষের কাছে পাঠানো হয়েছে!', confirmButtonColor: '#10b981' });
                 document.getElementById('issue-text').value=''; 
+                document.getElementById('btn-submit-complaint').disabled = false;
             }).catch(err => {
                 Swal.fire({ icon: 'error', title: 'সমস্যা', text: 'কোথাও কোনো সমস্যা হয়েছে। আবার চেষ্টা করুন।', confirmButtonColor: '#ef4444' });
+                document.getElementById('btn-submit-complaint').disabled = false;
             });
         }
 
-        // HTML to JPEG Export Logic
+        // Direct JPEG Export
         function downloadImage(rNo, dt, mth, amt) {
             document.getElementById('r-id').innerText = rNo || "N/A"; document.getElementById('r-date').innerText = dt;
             document.getElementById('r-name').innerText = loggedInUser.name; document.getElementById('r-userid').innerText = loggedInUser.userId;
@@ -369,13 +384,8 @@
             
             Swal.fire({ title: 'রশিদ তৈরি হচ্ছে...', text: 'দয়া করে কিছুক্ষণ অপেক্ষা করুন।', allowOutsideClick: false, didOpen: () => { Swal.showLoading(); }});
 
-            // Ensure fonts are loaded before generating image
             document.fonts.ready.then(() => {
-                html2canvas(el, {
-                    scale: 3, // HD Quality
-                    useCORS: true,
-                    backgroundColor: "#ffffff"
-                }).then(canvas => {
+                html2canvas(el, { scale: 3, useCORS: true, backgroundColor: "#ffffff" }).then(canvas => {
                     let imgData = canvas.toDataURL("image/jpeg", 1.0);
                     let link = document.createElement('a');
                     link.download = `Receipt_${loggedInUser.userId}_${mth}.jpg`;
