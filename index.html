@@ -16,7 +16,9 @@
     
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <!-- HTML to JPEG Image Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap');
@@ -36,7 +38,7 @@
         .dev-footer { background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a); border-top: 1px solid #0284c7; box-shadow: 0 -4px 15px rgba(2,132,199,0.3); }
         .swal2-title, .swal2-html-container { font-family: 'Hind Siliguri', sans-serif !important; }
 
-        /* Receipt Template CSS */
+        /* HD Receipt Template CSS For Image Export */
         #receipt-template {
             width: 210mm; height: 125mm; padding: 25px; background: white; color: black; font-family: 'Hind Siliguri', sans-serif;
             border: 2px solid #ccc; position: relative; margin: 0 auto;
@@ -72,7 +74,6 @@
     <!-- Main App Screen -->
     <div id="app-screen" class="hidden px-4 pb-20 mt-4 max-w-md mx-auto w-full smooth-scroll">
         
-        <!-- Smooth Notice Slider -->
         <div class="bg-gradient-to-r from-amber-100 to-yellow-100 border border-yellow-300 text-yellow-800 rounded-xl shadow-sm flex items-center mb-5 overflow-hidden w-full">
             <div class="bg-yellow-500 text-white px-3 py-2 flex items-center justify-center z-10"><i class="fas fa-bullhorn animate-pulse text-lg"></i></div>
             <div class="marquee-wrapper flex-1 py-2 text-sm border-l border-yellow-300">
@@ -80,7 +81,6 @@
             </div>
         </div>
 
-        <!-- Dashboard Card -->
         <div class="bg-white p-6 rounded-3xl shadow-md border-l-[6px] border-blue-600 flex justify-between items-center cursor-pointer hover:shadow-lg transition" onclick="openPaymentHistoryModal()">
             <div>
                 <h2 class="text-xl text-gray-600 font-medium">স্বাগতম, <br><span id="u-name" class="text-2xl font-black text-gray-800 border-b-2 border-dashed border-blue-400"></span></h2>
@@ -90,7 +90,6 @@
         </div>
         <p class="text-[10px] text-gray-400 font-bold text-right mt-1.5"><i class="fas fa-hand-pointer text-blue-400"></i> হিস্ট্রি দেখতে কার্ডে ক্লিক করুন</p>
 
-        <!-- Advanced Due Alert -->
         <div id="due-alert" class="mt-5 bg-red-50 border border-red-200 rounded-3xl p-5 shadow-sm hidden">
             <div class="flex items-center mb-2">
                 <div class="bg-red-100 text-red-600 p-2 rounded-full mr-3 shadow-inner"><i class="fas fa-exclamation-triangle animate-bounce text-lg"></i></div>
@@ -102,13 +101,11 @@
             </div>
         </div>
 
-        <!-- My Complaints -->
         <div class="mt-6 bg-white p-5 rounded-3xl shadow-sm border border-gray-100">
             <h3 class="font-bold text-gray-800 mb-3 border-b border-gray-100 pb-2"><i class="fas fa-clipboard-list text-purple-500 text-lg mr-1"></i> আপনার অভিযোগসমূহ</h3>
             <div id="my-complaints-list" class="max-h-48 overflow-y-auto smooth-scroll pr-1"></div>
         </div>
 
-        <!-- Submit Complaint -->
         <div class="mt-6 bg-white p-6 rounded-3xl shadow-md border border-gray-100 mb-5">
             <h3 class="font-bold text-lg mb-3 text-gray-800"><i class="fas fa-headset text-red-500 text-lg mr-1"></i> নতুন অভিযোগ জানান</h3>
             <textarea id="issue-text" rows="3" placeholder="সমস্যাটি বিস্তারিত লিখুন..." class="w-full p-4 border border-gray-200 rounded-2xl mb-4 bg-gray-50 outline-none focus:border-red-400 focus:ring-2 focus:ring-red-100 transition resize-none text-sm"></textarea>
@@ -116,7 +113,7 @@
         </div>
     </div>
 
-    <!-- Beautiful Payment History Modal -->
+    <!-- History Modal -->
     <div id="payment-modal" class="fixed inset-0 bg-black/60 z-[60] hidden flex-col justify-end backdrop-blur-sm">
         <div class="bg-white w-full rounded-t-[2rem] max-h-[85vh] flex flex-col modal-enter relative shadow-2xl">
             <div class="p-5 border-b border-gray-100 flex justify-between items-center bg-white rounded-t-[2rem] sticky top-0 z-10 shadow-sm">
@@ -144,7 +141,7 @@
         </div>
     </div>
 
-    <!-- Slim & Elegant Dev Footer -->
+    <!-- Developer Footer -->
     <div class="fixed bottom-0 w-full dev-footer z-50 overflow-hidden">
         <div class="marquee-wrapper py-1.5 flex items-center">
             <div id="dev-marquee" class="marquee-content text-[11px] md:text-xs tracking-wider text-sky-300 font-bold">
@@ -153,7 +150,7 @@
         </div>
     </div>
 
-    <!-- Hidden A5 Landscape Receipt Template -->
+    <!-- Hidden A5 Landscape Receipt Template (HTML to JPEG) -->
     <div id="pdf-wrapper" class="hidden">
         <div id="receipt-template">
             <p style="text-align: center; font-size: 13px; margin: 0 0 5px 0; font-weight: bold;">বিসমিল্লাহির রাহমানির রাহিম</p>
@@ -161,7 +158,8 @@
             <div class="rcpt-header">
                 <i class="fas fa-satellite-dish" style="font-size: 40px;"></i>
                 <div>
-                    <h1 style="font-size: 32px; font-weight: 900; margin: 0; letter-spacing: 1px;">এস,এইচ ক্যাবল নেটওয়ার্ক</h1>
+                    <!-- Font fix: Removed letter-spacing to prevent html2canvas breaking Bengali text -->
+                    <h1 style="font-size: 32px; font-family: 'Hind Siliguri', sans-serif; font-weight: 900; margin: 0;">এস,এইচ ক্যাবল নেটওয়ার্ক</h1>
                     <p style="margin: 4px 0 0 0; font-size: 14px;">উত্তর কেরোয়া, নয়ারহাট, জোড়পুল, রায়পুর, লক্ষ্মীপুর ।</p>
                 </div>
             </div>
@@ -204,7 +202,7 @@
         if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
         const db = firebase.database();
 
-        let loggedInUser = null; let paymentData = []; let paymentCount = 0;
+        let loggedInUser = null; let paymentData = [];
         const bnMonths = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
 
         window.onload = function() {
@@ -288,12 +286,9 @@
                     let comps = []; 
                     snap.forEach(c => {
                         let compData = c.val();
-                        // 72 hours logic for Customer App
                         if(compData.status === 'resolved' && compData.resolvedAt) {
                             let timePassed = Date.now() - compData.resolvedAt;
-                            if(timePassed > 72 * 60 * 60 * 1000) {
-                                return; // 72 ঘন্টা পার হলে স্কিপ করবে (গ্রাহককে দেখাবে না)
-                            }
+                            if(timePassed > 72 * 60 * 60 * 1000) return; // Hide after 72 hours
                         }
                         comps.push(compData);
                     }); 
@@ -335,7 +330,7 @@
             }
             let html=`<div class="grid grid-cols-2 gap-3">`;
             f.forEach(p => {
-                html+=`<div class="bg-white border border-gray-100 p-4 rounded-2xl shadow-sm relative group cursor-pointer hover:shadow-md transition" onclick="downloadPDF('${p.receiptNo}', '${p.date}', '${p.parsedMonth} ${p.parsedYear}', '${p.amount}')">
+                html+=`<div class="bg-white border border-gray-100 p-4 rounded-2xl shadow-sm relative group cursor-pointer hover:shadow-md transition" onclick="downloadImage('${p.receiptNo}', '${p.date}', '${p.parsedMonth} ${p.parsedYear}', '${p.amount}')">
                     <span class="absolute -top-2.5 -right-2 bg-green-500 text-white text-[10px] px-2.5 py-1 rounded-full font-bold shadow-md border-2 border-white z-10 flex items-center"><i class="fas fa-check-circle mr-1"></i> পেইড</span>
                     <p class="font-extrabold text-gray-800 text-sm mb-0">${p.parsedMonth}</p><p class="text-gray-400 text-[10px] font-bold mb-2"><i class="far fa-calendar-alt"></i> ${p.date}</p>
                     <p class="text-blue-600 font-black text-xl mb-3">৳${p.amount}</p>
@@ -359,7 +354,8 @@
             });
         }
 
-        function downloadPDF(rNo, dt, mth, amt) {
+        // HTML to JPEG Export Logic
+        function downloadImage(rNo, dt, mth, amt) {
             document.getElementById('r-id').innerText = rNo || "N/A"; document.getElementById('r-date').innerText = dt;
             document.getElementById('r-name').innerText = loggedInUser.name; document.getElementById('r-userid').innerText = loggedInUser.userId;
             document.getElementById('r-address').innerText = loggedInUser.address || "N/A"; 
@@ -368,14 +364,30 @@
             let paidMonthName = mth.split(' ')[0]; 
             document.getElementById('r-thank-you').innerText = `ধন্যবাদ ${paidMonthName} মাসের বিল পরিশোধ করার জন্য।`;
 
-            let el = document.getElementById('receipt-template'); document.getElementById('pdf-wrapper').classList.remove('hidden');
+            let el = document.getElementById('receipt-template'); 
+            document.getElementById('pdf-wrapper').classList.remove('hidden');
             
             Swal.fire({ title: 'রশিদ তৈরি হচ্ছে...', text: 'দয়া করে কিছুক্ষণ অপেক্ষা করুন।', allowOutsideClick: false, didOpen: () => { Swal.showLoading(); }});
 
-            html2pdf().set({ margin: 0, filename: `Receipt_${mth}.pdf`, html2canvas: { scale: 2 }, jsPDF: { unit: 'mm', format: 'a5', orientation: 'landscape' } })
-            .from(el).save().then(() => {
-                document.getElementById('pdf-wrapper').classList.add('hidden');
-                Swal.close();
+            // Ensure fonts are loaded before generating image
+            document.fonts.ready.then(() => {
+                html2canvas(el, {
+                    scale: 3, // HD Quality
+                    useCORS: true,
+                    backgroundColor: "#ffffff"
+                }).then(canvas => {
+                    let imgData = canvas.toDataURL("image/jpeg", 1.0);
+                    let link = document.createElement('a');
+                    link.download = `Receipt_${loggedInUser.userId}_${mth}.jpg`;
+                    link.href = imgData;
+                    link.click();
+                    
+                    document.getElementById('pdf-wrapper').classList.add('hidden');
+                    Swal.close();
+                }).catch(err => {
+                    Swal.fire('ত্রুটি', 'রশিদ তৈরি করতে সমস্যা হয়েছে।', 'error');
+                    document.getElementById('pdf-wrapper').classList.add('hidden');
+                });
             });
         }
     </script>
